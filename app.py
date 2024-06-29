@@ -9,15 +9,18 @@ us_cities = pd.read_csv(url)
 # Streamlit app
 st.title('US Locations Map')
 
-# Create filter options
+# Create filter options for states
 states = us_cities['State'].unique()
 selected_states = st.multiselect('Select State(s)', states, default=states)
 
+# Filter data based on selected states
 filtered_data = us_cities[us_cities['State'].isin(selected_states)]
 
+# Create filter options for cities within the selected states
 cities = filtered_data['City'].unique()
 selected_cities = st.multiselect('Select City(ies)', cities, default=cities)
 
+# Filter data based on selected cities
 final_data = filtered_data[filtered_data['City'].isin(selected_cities)]
 
 # Create the Plotly map
