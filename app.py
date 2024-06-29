@@ -9,8 +9,19 @@ us_cities = pd.read_csv(url)
 # Streamlit app
 st.title('US Locations Map')
 
+# Create filter options
+states = us_cities['State'].unique()
+selected_states = st.multiselect('Select State(s)', states, default=states)
+
+filtered_data = us_cities[us_cities['State'].isin(selected_states)]
+
+cities = filtered_data['City'].unique()
+selected_cities = st.multiselect('Select City(ies)', cities, default=cities)
+
+final_data = filtered_data[filtered_data['City'].isin(selected_cities)]
+
 # Create the Plotly map
-fig = px.scatter_mapbox(us_cities, lat="latitude", lon="longitude", hover_name="City", hover_data=["State"],
+fig = px.scatter_mapbox(final_data, lat="latitude", lon="longitude", hover_name="City", hover_data=["State", "Address"],
                         color_discrete_sequence=["fuchsia"], zoom=3, height=600)
 
 fig.update_layout(mapbox_style="open-street-map")
