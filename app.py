@@ -32,7 +32,7 @@ filtered_data = us_cities[
 fig = px.scatter_mapbox(filtered_data, lat="latitude", lon="longitude", hover_name="City", hover_data=["State", "Address"],
                         color_discrete_sequence=["fuchsia"], zoom=3, height=600)
 
-fig.update_layout(mapbox_style="carto-darkmatter")
+fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 # Show the map in the Streamlit app
